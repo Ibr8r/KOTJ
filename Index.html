@@ -1,23 +1,28 @@
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title> عنوان السورس</title>
-</head>
-<body>
-<h1>اسم السورس </h1>
-<div ><img src="CydiaIcon.png" alt="" style="width:100px"; > </div>
+<?php
 
-<div class="name"><p>وصف السورس</p></div>
 
-<div><ul class="btns">
 
-<li><div class="cydia"><a href="cydia://url/https://cydia.saurik.com/api/share#?source=***"><button class="cydiabtn">CYDIA</button></a></div></li>
+$deb = $_GET['deb'];
 
-<li><div class="sileo"> <a href="sileo://source/***"><button class="sileobtn">SILEO</button> </a></div></li>
+$path = "api/debs/$deb"; 
 
-<li><div class="zebra"><a href="zbra://sources/add/***/"><button class="zebrabtn">ZEBRA</button> </a></div></li>
+// get file deb 
+$file1 = basename($path); 
+$file2 = basename($path, ".php"); 
+// Get SHA1 type
+$sha1file = sha1_file($path);
+// Get SHA256 type
+$sha256 = hash_file("sha256", $path);
 
-</ul></div>
-</body>
-</html>
+
+echo 'File name: '. $file1 .' <br>';
+// Get MD5 type
+echo 'MD5 file: ' . md5_file($path).' <br>';
+
+// Get size file bytes
+echo 'File size: ' . filesize($path) . ' bytes <br>';
+echo 'SHA1 file: ' . $sha1file . '<br>';
+echo 'SHA256 file: ' . $sha256 . '<br>';
+
+
+?>
